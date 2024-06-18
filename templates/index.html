@@ -28,24 +28,52 @@
 
     <nav class="navbar"></nav>
 
-    <div></div>
+    <div>
+      <img />
+    </div>
 
     <div class="container mt-5">
       <div class="row">
         <div class="col-sm-4">
           <div class="">
-            <h2>Subscribe Us</h2>
-            <h5>descrption</h5>
-            <div class=""></div>
-            <p>
-              Some text about me in culpa qui officia deserunt mollit anim..
-            </p>
-          </div>
-
-          <div class="">
             <h3 class="mt-4">Top Delay Lines</h3>
             <p>Lorem ipsum dolor sit ame.</p>
             <table></table>
+          </div>
+          <br />
+          <div
+            class="container-fluid"
+            style="background-color: #97cba9; padding: 10px; border-radius: 8px"
+          >
+            <h3>Subscribe Us</h3>
+            <p>
+              Subscribe to our newsletter to receive <br />
+              updated delays.
+            </p>
+            <div class="form">
+              <form
+                class="input text-center"
+                action="{{url_for('subscript')}}"
+                method="POST"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Enter Your Email"
+                  required
+                />
+                <br />
+                <button
+                  class="btn mb-3 btn-light"
+                  type="submit"
+                  style="cursor: pointer; padding: 6px 30px; font-weight: 450"
+                >
+                  <span>SUBSCRIBE</span>
+                </button>
+              </form>
+            </div>
           </div>
 
           <hr class="d-sm-none" />
