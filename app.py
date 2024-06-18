@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:groe46disc@localhost:5432/mtasubwaydelays'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:{password}@localhost:5432/mtasubwaydelays'
 # Debugging line to print the URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app)
