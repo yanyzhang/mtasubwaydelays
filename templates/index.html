@@ -1,147 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTA Subway Delays</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles/styles.css" />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='styles/bootstrap.min.css')}}"
-    />
-  </head>
-  <body>
-    <header class="d-flex" style="background-color: #233142">
-      <div class="p-2">
-        <img
-          src="../static/img/train-times_2154933.png"
-          class="img-fluid"
-          alt="logo"
-          href="{{url_for('index')}}"
-          style="width: 60px"
-        />
-      </div>
-      <h1 class="text-center text-white fw-bold display-6 p-2 flex-grow-1">
-        MTA Subway Delays
-      </h1>
-    </header>
-
-    <nav class="navbar"></nav>
-
+<!-- index.html -->
+{% extends "base.html" %} {% block title %}MTA Subway Delays{% endblock %}
+{%block content %}
+<div class="row">
+  <div class="col-sm-4">
     <div>
-      <img />
+      <h3 class="mt-4">Top Delay Lines</h3>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <table></table>
     </div>
-
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="">
-            <h3 class="mt-4">Top Delay Lines</h3>
-            <p>Lorem ipsum dolor sit ame.</p>
-            <table></table>
-          </div>
+    <br />
+    <div
+      class="container-fluid"
+      style="background-color: #97cba9; padding: 10px; border-radius: 8px"
+    >
+      <h3>Subscribe Us</h3>
+      <p>Subscribe to our newsletter to receive updated delays.</p>
+      <div class="form">
+        <form
+          class="input text-center"
+          action="{{ url_for('subscribe') }}"
+          method="POST"
+        >
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter Your Email"
+            required
+          />
           <br />
-          <div
-            class="container-fluid"
-            style="background-color: #97cba9; padding: 10px; border-radius: 8px"
-          >
-            <h3>Subscribe Us</h3>
-            <p>
-              Subscribe to our newsletter to receive <br />
-              updated delays.
-            </p>
-            <div class="form">
-              <form
-                class="input text-center"
-                action="{{url_for('subscript')}}"
-                method="POST"
-              >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Enter Your Email"
-                  required
-                />
-                <br />
-                <button
-                  class="btn mb-3 btn-light"
-                  type="submit"
-                  style="cursor: pointer; padding: 6px 30px; font-weight: 450"
-                >
-                  <span>SUBSCRIBE</span>
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <hr class="d-sm-none" />
-        </div>
-        <div class="col-sm-8">
-          <div class="col-sm-12" style="background-color: #f2e9d0">
-            <h2>heading 2</h2>
-            <h5>description</h5>
-            <div class=""><table></table></div>
-          </div>
-          <p>Some text..</p>
-          <p>
-            Sunt in culpa qui officia deserunt mollit anim id est laborum
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco.
-          </p>
-
-          <div class="">
-            <h2 class="mt-5" id="">Delays</h2>
-            <table
-              class="p-3 table table-striped table-hover"
-              style="color: #5dacbd"
-            >
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td scope="row"></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
           <button
-            class="btn m-5"
-            style="
-              background: radial-gradient(
-                circle at 10% 20%,
-                rgb(255, 197, 61) 0%,
-                rgb(255, 94, 7) 90%
-              );
-            "
+            class="btn mb-3 btn-light"
+            type="submit"
+            style="cursor: pointer; padding: 6px 30px; font-weight: 450"
           >
-            <a
-              class="text-decoration-none text-white text-uppercase"
-              href="{{url_for('index')}}"
-              >Add a New Delay</a
-            >
+            <span>SUBSCRIBE</span>
           </button>
-        </div>
+        </form>
       </div>
     </div>
-
-    <footer
-      class="footer mt-5 p-4 text-center text-white"
-      style="background-color: #9cd3d3"
+    <hr class="d-sm-none" />
+  </div>
+  <div class="col-sm-8">
+    <div class="col-sm-12" style="background-color: #f2e9d0">
+      <h2>heading 2</h2>
+      <h5>description</h5>
+      <div><table></table></div>
+    </div>
+    <p>Some text..</p>
+    <p>
+      Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </p>
+    <div>
+      <h2 class="mt-5" id="">Delays</h2>
+      <table class="p-3 table table-striped table-hover" style="color: #5dacbd">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button
+      class="btn m-5"
+      style="
+        background: radial-gradient(
+          circle at 10% 20%,
+          rgb(255, 197, 61) 0%,
+          rgb(255, 94, 7) 90%
+        );
+      "
     >
-      <p>This is the footer</p>
-    </footer>
-  </body>
-</html>
+      <a
+        class="text-decoration-none text-white text-uppercase"
+        href="{{ url_for('index') }}"
+        >Add a New Delay</a
+      >
+    </button>
+  </div>
+</div>
+{% endblock %}

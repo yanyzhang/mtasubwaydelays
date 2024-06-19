@@ -1,0 +1,12 @@
+<!-- subscribe.html -->
+{% extends "base.html" %} {% block title %}Subscription{% endblock %} {% block
+content %}
+<div>
+  <h1>Thank you for subscribing to MTA Subway Delays!</h1>
+  <p>You will now receive updates about the latest delays.</p>
+</div>
+
+<div>
+  <a href="{{ url_for('index') }}">Back to homepage</a>
+</div>
+{% endblock %}
