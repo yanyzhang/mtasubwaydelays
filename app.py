@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:[password]c@localhost:5432/mtasubwaydelays'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:password@localhost:5432/mtasubwaydelays'
 # Debugging line to print the URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['SECRET_KEY'] = 'secret_key'
@@ -31,6 +31,13 @@ with app.app_context():
 def index():
     return render_template('index.html')
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
 
 
 
