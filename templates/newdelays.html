@@ -1,16 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Delays</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles/styles.css" />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='styles/bootstrap.min.css')}}"
-    />
-  </head>
-  <body>
-    <form action="">Enter new delays</form>
-  </body>
-</html>
+{% extends "base.html" %} {% block title %}MTA Subway Delays{% endblock %}
+{%block content %}
+<div>
+  <h2>Report Subway Delay</h2>
+  <form action="/newdelays" method="post">
+
+    <label for="subwayline">Subway Line</label>
+    <input type="text" id="subwayline" placeholder="Subway Line" maxlength="1" required name="subwayline">
+    <br><br>
+    <label for="stationname">Station Name</label>
+    <input type="text" id="stationname" placeholder="Station Name" maxlength="255" required name="stationname">
+    <br><br>
+    <label for="date">Date Delay Happened</label>
+    <input type="date" id="date" placeholder="Date of Delay" required name="date">
+    <br><br>
+    <label for="delayminutes">How Many Minutes Train Delayed</label>
+    <input type="number" id="delayminutes" placeholder="Number of Minutes" min="1" required name="delayminutes">
+
+    <button type="submit" class="btn btn-info">Submit</button>
+
+
+
+  </form>
+
+</div>
+{% endblock %}

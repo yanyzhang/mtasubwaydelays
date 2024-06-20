@@ -10,7 +10,22 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['SECRET_KEY'] = 'secret_key'
 db=SQLAlchemy(app)
 
+class SubwayDelays(db.Model):
+    __tablename__="subway_delays"
+    id=db.Column(db.Integer, primary_key=True)
+    subwayline=db.Column(db.String(1))
+    stationname=db.Column(db.String(255))
+    date=db.Column(db.Date)
+    delayminutes=db.Column(db.SmallInteger, nullable=False)
 
+    def __init__(self, subwayline, stationname, date, delayminutes):
+        self.subwayline = subwayline
+        self.stationname = stationname
+        self.date = date
+        self.delayminutes = delayminutes
+
+    def __repr__(self):
+        return f'<SubwayDelays {self.subwayline} {self.stationname} {self.date} {self.delayminutes}>'
 
 
 class EmailData(db.Model):
@@ -39,7 +54,25 @@ def about():
 def contact():
     return render_template('contact.html')
 
+# @app.route("/newdelays")
+# def newdelays():
+#     return render_template('newdelays.html')
 
+@app.route('/newdelays',methods=['GET','POST'])
+def newdelays():
+    if request.method == 'POST':
+        subwayline=request.form['subwayline']
+        stationname=request.form['stationname']
+        date=request.form['date']
+        delayminutes=request.form['delayminutes']
+
+        new_subwaydelays=SubwayDelays(subwayline=subwayline, stationname=stationname, date=date, delayminutes=delayminutes)
+        db.session.add(new_subwaydelays)
+        db.session.commit()
+        flash('Delay reported successfully!', 'success')
+
+        return redirect(url_for('index'))
+    return render_template('newdelays.html')
 
 @app.route("/subscribe", methods=['POST'])
 def subscribe():
