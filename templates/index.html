@@ -1,6 +1,33 @@
 <!-- index.html -->
 {% extends "base.html" %} {% block title %}MTA Subway Delays{% endblock %}
 {%block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12 image-container position-relative">
+      <img
+        src="/static/img/Subwaymapshorter.jpg"
+        class="img-responsive"
+        style="width: 100%; height: auto; display: block; object-fit: cover"
+        alt="subway map"
+      />
+      <div
+        class="text-overlay position-absolute top-0 left-1 right-0 bottom-0 p-20 fs-3 fw-bold text-uppercase"
+        style="
+          background-color: rgba(255, 255, 255, 0.8);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        "
+      >
+        <p style="color: #59a985">Stay informed</p>
+        <p style="color: #385170">with the</p>
+        <p style="color: #142d4c">latest delay status.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
 <div class="row">
   <div class="col-sm-4">
     <div>
@@ -14,7 +41,7 @@
       style="background-color: #97cba9; padding: 10px; border-radius: 8px"
     >
       <h3>Subscribe Us</h3>
-      <p>Subscribe to our newsletter to receive updated delays.</p>
+      <p>Subscribe to our newsletter to receive updated train delays.</p>
       <div class="form">
         <form
           class="input text-center"
@@ -30,6 +57,19 @@
             required
           />
           <br />
+          {% with messages = get_flashed_messages(with_categories=True) %} {% if
+          messages %}
+          <div class="alert-messages">
+            {% for category, message in messages %}
+            <div
+              class="alert alert-{{ category }} mt-3 text-success fst-italic"
+              role="alert"
+            >
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %} {% endwith %}
           <button
             class="btn mb-3 btn-light"
             type="submit"
