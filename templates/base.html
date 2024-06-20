@@ -28,9 +28,16 @@
         MTA Subway Delays
       </h1>
     </header>
-    <nav class="navbar">
-      <!-- Navigation content -->
-    </nav>
+    <nav class="nav nav-pills nav-fill border border-info">
+      <a href="{{ url_for('index') }}" class="nav-item nav-link active">Home</a>
+      <a href="{{ url_for('about') }}" class="nav-item nav-link">About</a>
+      <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+  </nav>
+
+    
+
+   
+    
     <div class="container mt-5">
       {% with messages = get_flashed_messages(with_categories=True) %} {% if
       messages %}
@@ -44,6 +51,7 @@
         </div>
         {% endfor %}
       </div>
+      
       {% endif %} {% endwith %} {% block content %}{% endblock %}
     </div>
     <footer
