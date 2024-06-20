@@ -2,6 +2,31 @@
 {% extends "base.html" %} {% block title %}MTA Subway Delays{% endblock %}
 {%block content %}
 <div class="row">
+  <div class="image-container position-relative">
+    <img
+      src="/static/img/Subwaymapshorter.jpg"
+      class="img-responsive"
+      style="width: 100%; height: auto; display: block; object-fit: cover"
+      alt="subway map"
+    />
+    <div
+      class="text-overlay position-absolute top-0 left-1 right-0 bottom-0 p-20 fs-3 fw-bold text-uppercase"
+      style="
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      "
+    >
+      <p style="color: #59a985">Stay informed</p>
+      <p style="color: #385170">with the</p>
+      <p style="color: #142d4c">latest delay status.</p>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="row">
   <div class="col-sm-4">
     <div>
       <h3 class="mt-4">Top Delay Lines</h3>
@@ -30,6 +55,20 @@
             required
           />
           <br />
+          {% with messages = get_flashed_messages(with_categories=True) %} {% if
+          messages %}
+          <div class="alert-messages">
+            {% for category, message in messages %}
+            <div
+              class="alert alert-{{ category }} mt-3 text-success"
+              role="alert"
+            >
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+
+          {% endif %} {% endwith %}
           <button
             class="btn mb-3 btn-light"
             type="submit"
