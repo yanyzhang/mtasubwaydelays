@@ -44,6 +44,10 @@
       <a href="{{ url_for('index') }}" class="nav-item nav-link text-white"
         >Home</a
       >
+      <a href="{{ url_for('newdelays') }}" class="nav-item nav-link text-white"
+        >Report Delays</a
+      >
+      <a href="" class="nav-item nav-link text-white">Statistic</a>
       <a href="{{ url_for('about') }}" class="nav-item nav-link text-white"
         >About</a
       >
@@ -65,13 +69,13 @@
       </div>
       <ul class="list-inline" style="list-style: none; line-height: 1.6">
         <li class="list-inline-item">
-          <a href="#">Home</a>
+          <a href="{{ url_for('index') }}">Home</a>
         </li>
         <li class="list-inline-item">
           <a href="#">Services</a>
         </li>
         <li class="list-inline-item">
-          <a href="#">About</a>
+          <a href="{{ url_for('about') }}">About</a>
         </li>
         <li class="list-inline-item">
           <a href="#">Terms</a>

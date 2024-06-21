@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 
@@ -19,8 +20,8 @@ class SubwayDelays(db.Model):
     delayminutes=db.Column(db.SmallInteger, nullable=False)
 
     def __init__(self, subwayline, stationname, date, delayminutes):
-        self.subwayline = subwayline
-        self.stationname = stationname
+        self.subwayline = subwayline.upper()
+        self.stationname = stationname.upper()
         self.date = date
         self.delayminutes = delayminutes
 
@@ -44,7 +45,17 @@ with app.app_context():
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    latest_delays = SubwayDelays.query.order_by(SubwayDelays.date.desc()).limit(10).all()
+    table_headers = ['Date', 'Subway Line', 'Station Name', 'Delay Minutes']
+
+    top_delayed_lines = db.session.query(SubwayDelays.subwayline, db.func.sum(SubwayDelays.delayminutes).label('total_delay')) \
+                                  .group_by(SubwayDelays.subwayline) \
+                                  .order_by(db.desc('total_delay')) \
+                                  .limit(5) \
+                                  .all()
+    ranked_lines = [(index + 1, line.subwayline) for index, line in enumerate(top_delayed_lines)]
+
+    return render_template('index.html', latest_delays=latest_delays, table_headers=table_headers, top_delayed_lines=top_delayed_lines, ranked_line=ranked_lines)
 
 @app.route("/about")
 def about():
@@ -60,10 +71,12 @@ def contact():
 
 @app.route('/newdelays',methods=['GET','POST'])
 def newdelays():
+    today_date = datetime.today().strftime('%Y-%m-%d')
     if request.method == 'POST':
         subwayline=request.form['subwayline']
         stationname=request.form['stationname']
-        date=request.form['date']
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
+        # date=request.form['date']
         delayminutes=request.form['delayminutes']
 
         new_subwaydelays=SubwayDelays(subwayline=subwayline, stationname=stationname, date=date, delayminutes=delayminutes)
@@ -71,8 +84,10 @@ def newdelays():
         db.session.commit()
         flash('Delay reported successfully!', 'success')
 
-        return redirect(url_for('index'))
-    return render_template('newdelays.html')
+        return render_template('newdelays.html', today_date=today_date, show_flash=True)
+    return render_template('newdelays.html', today_date=today_date, show_flash=False)
+
+
 
 @app.route("/subscribe", methods=['POST'])
 def subscribe():
@@ -80,7 +95,7 @@ def subscribe():
     if email:
         existing_email =EmailData.query.filter_by(email=email).first()
         if existing_email:
-            flash("You are already subscribing!")
+            flash("You are already subscribing!", 'success')
             return redirect(url_for('index'))
 
 
