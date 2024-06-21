@@ -28,8 +28,12 @@
 <br />
 <div class="row">
   <div class="col-sm-4">
-    <div>
+    <div
+      class="container-fluid"
+      style="background-color: #79c2d0; padding: 10px; border-radius: 8px"
+    >
       <h3 class="mt-4">Top Delay Lines</h3>
+      <p>Ranking of the subway lines that has most delays.</p>
       <!-- <p>Lorem ipsum dolor sit amet.</p>
       <table></table> -->
       <ul>
@@ -37,6 +41,30 @@
         <li>{{ line.subwayline }} ({{ line.total_delays }} delays)</li>
         {% endfor %}
       </ul>
+
+    <div
+      class="col"
+      style="background-color: #f2e9d0; padding: 10px; border-radius: 8px"
+    >
+      <h3>MTA Top Stories</h3>
+    </div>
+    <div class="" style="padding: 10px">
+      <a
+        href="https://www.cbsnews.com/newyork/video/mta-official-says-work-on-2nd-avenue-subway-is-on-hold"
+        style="font-weight: bold"
+        >MTA official says work on 2nd Avenue Subway is on hold</a
+      >
+      <img
+        class="img-fluid"
+        src="/static/img/2ndAvenue.jpg"
+        alt="2ndAvenue Station"
+      />
+      <p>
+        An MTA official said work on the 2nd Avenue Subway is now on hold
+        following Gov. Kathy Hochul's decision to pause congestion pricing.
+        -CBSNews
+      </p>
+
     </div>
     <br />
     <div
@@ -64,10 +92,7 @@
           messages %}
           <div class="alert-messages">
             {% for category, message in messages %}
-            <div
-              class="alert alert-{{ category }} mt-3 text-success"
-              role="alert"
-            >
+            <div class="alert alert-{{ category }} mt-3" role="alert">
               {{ message }}
             </div>
             {% endfor %}
@@ -87,11 +112,66 @@
     <hr class="d-sm-none" />
   </div>
   <div class="col-sm-8">
+    <div class="d-grid">
+      <button
+        class="btn btn-lg"
+        style="
+          padding: 20px;
+          background: linear-gradient(
+            109.6deg,
+            rgb(36, 45, 57) 11.2%,
+            rgb(16, 37, 60) 51.2%,
+            rgb(0, 0, 0) 98.6%
+          );
+        "
+      >
+        <a
+          class="text-decoration-none text-white text-uppercase fw-bold"
+          href="{{ url_for('newdelays') }}"
+          >Report a New Delay</a
+        >
+      </button>
+      </div>
+    <div>
+      <h2 class="mt-5" id="">Current Delays</h2>
+
+      <table
+        class="p-3 table table-striped table-hover"
+        style="color: #5dacbd; padding: 10px; border-radius: 8px"
+      >
+        <thead>
+          <tr>
+            {% for header in table_headers %}
+            <th scope="col">{{ header }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for delay in latest_delays %}
+          <tr>
+            <td>{{ delay.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ delay.subwayline }}</td>
+            <td>{{ delay.stationname }}</td>
+            <td class="text-danger">{{ delay.delayminutes }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
     <div class="col-sm-12" style="background-color: #f2e9d0">
-      <!-- <h2>heading 2</h2>
-      <h5>description</h5> -->
+      <h2>MTA Delay Statistic</h2>
+      <h5>from resource....</h5>
       <div><table></table></div>
     </div>
+        <p></p>
+    <p>
+      Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </p>
+    
     
 <h1>Subway Delays Statistics</h1>
 
@@ -113,13 +193,6 @@
     {% endfor %}
   </tbody>
 </table>
-
-    <!-- <p>Some text..</p>
-    <p>
-      Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-    </p> -->
     <div>
       <!-- <h2 class="mt-5" id="">Delays</h2> -->
       <h2>Summary by Date</h2>
@@ -141,41 +214,8 @@
     {% endfor %}
   </tbody>
 </table>
-      <!-- <table class="p-3 table table-striped table-hover" style="color: #5dacbd">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table> -->
+
     </div>
-    <button
-      class="btn m-5"
-      style="
-        background: radial-gradient(
-          circle at 10% 20%,
-          rgb(255, 197, 61) 0%,
-          rgb(255, 94, 7) 90%
-        );
-      "
-    >
-      <a
-        class="text-decoration-none text-white text-uppercase"
-        href="{{ url_for('newdelays') }}"
-        >Add a New Delay</a
-      >
-    </button>
   </div>
 </div>
 {% endblock %}
