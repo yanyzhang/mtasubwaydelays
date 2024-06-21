@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func,extract
+from collections import defaultdict
 from datetime import datetime
 
 
@@ -45,6 +47,24 @@ with app.app_context():
 
 @app.route("/")
 def index():
+    statistics = {}
+    lines = db.session.query(SubwayDelays.subwayline,  func.avg(SubwayDelays.delayminutes).label('avg_delay')).group_by(SubwayDelays.subwayline).all()
+
+    for line,  avg_delay in lines:
+        statistics[line] = {
+            # 'total_delays': total_delays,
+            'avg_delay': round(avg_delay)
+        }
+    top_lines = db.session.query(SubwayDelays.subwayline, func.count(SubwayDelays.id).label('total_delays')).group_by(SubwayDelays.subwayline).order_by(func.count(SubwayDelays.id).desc()).limit(3).all()
+
+    date_summary = defaultdict(lambda: {'total_delays': 0, 'avg_delay': 0.0})
+    date_delays = db.session.query(extract('day', SubwayDelays.date).label('day'), extract('month', SubwayDelays.date).label('month'), extract('year', SubwayDelays.date).label('year'), func.count(SubwayDelays.id).label('total_delays'), func.avg(SubwayDelays.delayminutes).label('avg_delay')).group_by(extract('day', SubwayDelays.date), extract('month', SubwayDelays.date), extract('year', SubwayDelays.date)).all()
+
+    for day, month, year, total_delays, avg_delay in date_delays:
+        date_str = f"{year}-{month}-{day}"
+        date_summary[date_str]['total_delays'] = total_delays
+        date_summary[date_str]['avg_delay'] = round(avg_delay)
+
     latest_delays = SubwayDelays.query.order_by(SubwayDelays.date.desc()).limit(10).all()
     table_headers = ['Date', 'Subway Line', 'Station Name', 'Delay Minutes']
 
@@ -55,7 +75,8 @@ def index():
                                   .all()
     ranked_lines = [(index + 1, line.subwayline) for index, line in enumerate(top_delayed_lines)]
 
-    return render_template('index.html', latest_delays=latest_delays, table_headers=table_headers, top_delayed_lines=top_delayed_lines, ranked_line=ranked_lines)
+    return render_template('index.html', statistics=statistics, top_lines=top_lines,date_summary=date_summary, latest_delays=latest_delays, table_headers=table_headers, top_delayed_lines=top_delayed_lines, ranked_line=ranked_lines)
+  
 
 @app.route("/about")
 def about():

@@ -32,24 +32,16 @@
       class="container-fluid"
       style="background-color: #79c2d0; padding: 10px; border-radius: 8px"
     >
-      <h3 class="">Top Delay Lines</h3>
+      <h3 class="mt-4">Top Delay Lines</h3>
       <p>Ranking of the subway lines that has most delays.</p>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br />
+      <!-- <p>Lorem ipsum dolor sit amet.</p>
+      <table></table> -->
+      <ul>
+        {% for line in top_lines %}
+        <li>{{ line.subwayline }} ({{ line.total_delays }} delays)</li>
+        {% endfor %}
+      </ul>
+
     <div
       class="col"
       style="background-color: #f2e9d0; padding: 10px; border-radius: 8px"
@@ -72,6 +64,7 @@
         following Gov. Kathy Hochul's decision to pause congestion pricing.
         -CBSNews
       </p>
+
     </div>
     <br />
     <div
@@ -138,7 +131,7 @@
           >Report a New Delay</a
         >
       </button>
-    </div>
+      </div>
     <div>
       <h2 class="mt-5" id="">Current Delays</h2>
 
@@ -166,41 +159,62 @@
         </tbody>
       </table>
     </div>
-    <br />
-    <div
-      class="col-sm-12"
-      style="background-color: #f2e9d0; padding: 10px; border-radius: 8px"
-    >
+
+    <div class="col-sm-12" style="background-color: #f2e9d0">
       <h2>MTA Delay Statistic</h2>
       <h5>from resource....</h5>
       <div><table></table></div>
     </div>
-    <p></p>
+        <p></p>
     <p>
       Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
       adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
     </p>
+    
+    
+<h1>Subway Delays Statistics</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Subway Line</th>
+      <!-- <th>Total Delays</th> -->
+      <th>Average Delay (minutes)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for line, stats in statistics.items() %}
+    <tr>
+      <td>{{ line }}</td>
+      <!-- <td>{{ stats.total_delays }}</td> -->
+      <td>{{ stats.avg_delay }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
     <div>
-      <h2 class="mt-5" id="">Delays</h2>
-      <table class="p-3 table table-striped table-hover" style="color: #5dacbd">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- <h2 class="mt-5" id="">Delays</h2> -->
+      <h2>Summary by Date</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Total Delays</th>
+      <th>Average Delay (minutes)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for date, summary in date_summary.items() %}
+    <tr>
+      <td>{{ date }}</td>
+      <td>{{ summary.total_delays }}</td>
+      <td>{{ summary.avg_delay }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
     </div>
   </div>
 </div>
