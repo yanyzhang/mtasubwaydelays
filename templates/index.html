@@ -36,7 +36,7 @@
         class="container-fluid"
         style="background-color: #9fd3c7; padding: 10px; border-radius: 8px"
       >
-        <h3 class="">Top Delay Lines</h3>
+        <h3 class="">Top 3 Delay Lines</h3>
         <p>Ranking of the subway lines that has most delays.</p>
         <div
           class="bg-light"
@@ -131,11 +131,12 @@
   <div class="col-sm-8">
     <div class="pt-3 text-center pagination-centered">
       <button class="button type1">
-        <span class="btn-txt">Report a New Delay</span>
         <a
-          class="text-decoration-none text-white text-uppercase fw-bold"
+          class="text-decoration-none text-uppercase fw-bold"
           href="{{ url_for('newdelays') }}"
-        ></a>
+          >Report a New Delay</a
+        >
+        <!-- <span class="btn-txt">Report a New Delay</span> -->
       </button>
     </div>
     <br />

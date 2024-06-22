@@ -93,10 +93,11 @@ body {
 
 }
 
-.btn-txt {
+.button a {
   z-index: 1;
   font-weight: 800;
   letter-spacing: 4px;
+  text-decoration: none;
 }
 
 .type1::after {

@@ -3,14 +3,14 @@
 <h2 class="h2form">Report Subway Delay</h2>
 <div class="delayspage border border-primary rounded">
   <img
-      src="/static/img/delayimg.jpg"
-      class="form1img border border-primary rounded"
-      style="width: 50%;"
-      alt="subway delay info"
-    />
+    src="/static/img/delayimg.jpg"
+    class="form1img border border-primary rounded"
+    style="width: 50%"
+    alt="subway delay info"
+  />
   <br />
   <!-- Flash message container -->
-  {% if show_flash and get_flashed_messages() %}
+  <!-- {% if show_flash and get_flashed_messages() %}
   <div id="flash-container" style="color: green">
     {% for message in get_flashed_messages() %}
     <p>{{ message }}</p>
@@ -22,7 +22,7 @@
     }, 3000);
   </script>
   {% endif %}
-  <br />
+  <br /> -->
 
   <form class="form1" action="/newdelays" method="post">
     <label for="subwayline">Subway Line</label>
@@ -31,7 +31,8 @@
       id="subwayline"
       placeholder="Subway Line"
       maxlength="1"
-      required pattern="[A-Z]{1,5}"
+      required
+      pattern="[A-Z1,7]"
       name="subwayline"
     />
     <br /><br />
@@ -65,7 +66,23 @@
     />
     <br />
     <br />
-    <button type="submit" style="margin-left: 40%" class="btn btn-info">Submit</button>
+    <!-- Flash message container -->
+    {% if show_flash and get_flashed_messages() %}
+    <div id="flash-container" style="color: green">
+      {% for message in get_flashed_messages() %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    <script>
+      setTimeout(function () {
+        window.location.href = "{{ url_for('index') }}";
+      }, 3000);
+    </script>
+    {% endif %}
+    <br />
+    <button type="submit" style="margin-left: 40%" class="btn btn-info">
+      Submit
+    </button>
   </form>
 </div>
 {% endblock %}
