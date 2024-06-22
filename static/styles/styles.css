@@ -77,58 +77,49 @@ body {
 }
 
 /* report button */
-.cta {
+.button {
+  height: 50px;
+  width: 300px;
   position: relative;
-  margin: auto;
-  padding: 19px 22px;
-  transition: all 0.2s ease;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid #79c2d0;
+  overflow: hidden;
+  border-radius: 30px;
+  color: #333;
+  transition: all 0.5s ease-in-out;
+
+
+
 }
 
-.cta::before {
+.btn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.type1::after {
   content: "";
   position: absolute;
-  top: 0;
   left: 0;
-  display: block;
-  border-radius: 28px;
-  background: rgba(var(--primary), 0.5); /* Changed $primary to CSS variable */
-  width: 56px;
-  height: 56px;
-  transition: all 0.3s ease;
-}
-
-.cta span {
-  position: relative;
-  font-size: 16px;
-  line-height: 18px;
-  font-weight: 900;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  vertical-align: middle;
-}
-
-.cta svg {
-  position: relative;
   top: 0;
-  margin-left: 10px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: var(--color); /* Changed $color to CSS variable */
-  stroke-width: 2;
-  transform: translateX(-5px);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease-in-out;
+  background-color: #79c2d0;
+  border-radius: 30px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
 }
 
-.cta:hover::before {
-  width: 100%;
-  background: rgba(var(--primary), 1); /* Changed $primary to CSS variable */
+.button:hover {
+  box-shadow: 1px 1px 50px #e4ecee;
+  color: #fff;
+  border: none;
 }
 
-.cta:hover svg {
-  transform: translateX(0);
-}
-
-.cta:active {
-  transform: scale(0.96);
+.type1:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
 }
