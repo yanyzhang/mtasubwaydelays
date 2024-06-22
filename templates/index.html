@@ -27,90 +27,107 @@
 <br />
 <br />
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-4 mb-3" style="min-width: 230px">
     <div
       class="container-fluid"
-      style="background-color: #79c2d0; padding: 10px; border-radius: 8px"
+      style="background-color: #79c2d0; padding: 15px; border-radius: 8px"
     >
-      <h3 class="mt-4">Top Delay Lines</h3>
-      <p>Ranking of the subway lines that has most delays.</p>
-      <!-- <p>Lorem ipsum dolor sit amet.</p>
-      <table></table> -->
-      <ul>
-        {% for line in top_lines %}
-        <li>{{ line.subwayline }} ({{ line.total_delays }} delays)</li>
-        {% endfor %}
-      </ul>
-
-    <div
-      class="col"
-      style="background-color: #f2e9d0; padding: 10px; border-radius: 8px"
-    >
-      <h3>MTA Top Stories</h3>
-    </div>
-    <div class="" style="padding: 10px">
-      <a
-        href="https://www.cbsnews.com/newyork/video/mta-official-says-work-on-2nd-avenue-subway-is-on-hold"
-        style="font-weight: bold"
-        >MTA official says work on 2nd Avenue Subway is on hold</a
+      <div
+        class="container-fluid"
+        style="background-color: #9fd3c7; padding: 10px; border-radius: 8px"
       >
-      <img
-        class="img-fluid"
-        src="/static/img/2ndAvenue.jpg"
-        alt="2ndAvenue Station"
-      />
-      <p>
-        An MTA official said work on the 2nd Avenue Subway is now on hold
-        following Gov. Kathy Hochul's decision to pause congestion pricing.
-        -CBSNews
-      </p>
-
-    </div>
-    <br />
-    <div
-      class="container-fluid"
-      style="background-color: #97cba9; padding: 10px; border-radius: 8px"
-    >
-      <h3>Subscribe Us</h3>
-      <p>Subscribe to our newsletter to receive updated delays.</p>
-      <div class="form">
-        <form
-          class="input text-center"
-          action="{{ url_for('subscribe') }}"
-          method="POST"
+        <h3 class="">Top Delay Lines</h3>
+        <p>Ranking of the subway lines that has most delays.</p>
+        <div
+          class="bg-light"
+          style="text-align: center; border-radius: 8px; opacity: 0.8"
         >
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter Your Email"
-            required
+          <ol style="text">
+            {% for line in top_lines %}
+            <li>{{ line.subwayline }} ({{ line.total_delays }} delays)</li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+      <br />
+      <div
+        class="col"
+        style="background-color: #f2e9d0; padding: 10px; border-radius: 8px"
+      >
+        <div class="">
+          <h3>MTA Top Stories</h3>
+        </div>
+        <div class="" style="">
+          <a
+            href="https://www.cbsnews.com/newyork/video/mta-official-says-work-on-2nd-avenue-subway-is-on-hold"
+            style="font-weight: bold"
+            >MTA official says work on 2nd Avenue Subway is on hold</a
+          >
+          <img
+            class="img-fluid"
+            src="/static/img/2ndAvenue.jpg"
+            alt="2ndAvenue Station"
           />
           <br />
-          {% with messages = get_flashed_messages(with_categories=True) %} {% if
-          messages %}
-          <div class="alert-messages">
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }} mt-3" role="alert">
-              {{ message }}
-            </div>
-            {% endfor %}
-          </div>
-
-          {% endif %} {% endwith %}
-          <button
-            class="btn mb-3 btn-light"
-            type="submit"
-            style="cursor: pointer; padding: 6px 30px; font-weight: 450"
-          >
-            <span>SUBSCRIBE</span>
-          </button>
-        </form>
+          <p>
+            An MTA official said work on the 2nd Avenue Subway is now on hold
+            following Gov. Kathy Hochul's decision to pause congestion pricing.
+            -CBSNews
+          </p>
+        </div>
       </div>
+      <br />
+      <div
+        class="container-fluid"
+        style="background-color: #97cba9; padding: 10px; border-radius: 8px"
+      >
+        <h3>Subscribe Us</h3>
+        <p>Subscribe to our newsletter to receive updated delays.</p>
+        <div class="form">
+          <form
+            class="input text-center"
+            action="{{ url_for('subscribe') }}"
+            method="POST"
+          >
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+              required
+            />
+            <br />
+            {% with messages = get_flashed_messages(with_categories=True) %} {%
+            if messages %}
+            <div class="alert-messages">
+              {% for category, message in messages %}
+              <div class="alert alert-{{ category }} mt-3" role="alert">
+                {{ message }}
+              </div>
+              {% endfor %}
+            </div>
+
+            {% endif %} {% endwith %}
+            <button
+              class="btn mb-3 btn-light"
+              type="submit"
+              style="
+                cursor: pointer;
+                padding: 6px 30px;
+                font-weight: 450;
+                white-space: normal;
+              "
+            >
+              <span>SUBSCRIBE</span>
+            </button>
+          </form>
+        </div>
+      </div>
+      <hr class="d-sm-none" />
     </div>
-    <hr class="d-sm-none" />
   </div>
+
   <div class="col-sm-8">
     <div class="d-grid">
       <button
@@ -131,90 +148,105 @@
           >Report a New Delay</a
         >
       </button>
-      </div>
-    <div>
-      <h2 class="mt-5" id="">Current Delays</h2>
+    </div>
+    <br />
+    <div
+      style="background-color: #b6cdbd; border-radius: 8px; min-width: 450px"
+    >
+      <h2 class="text-center p-2" id="">Current Delays</h2>
+      <p class="text-center">Most recent delays reported</p>
+      <div class="" style="padding: 15px">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              {% for header in table_headers %}
+              <th scope="col">{{ header }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
 
-      <table
-        class="p-3 table table-striped table-hover"
-        style="color: #5dacbd; padding: 10px; border-radius: 8px"
-      >
-        <thead>
-          <tr>
-            {% for header in table_headers %}
-            <th scope="col">{{ header }}</th>
+          <tbody>
+            {% for delay in latest_delays %}
+            <tr>
+              <td>{{ delay.date.strftime('%Y-%m-%d') }}</td>
+              <td>{{ delay.subwayline }}</td>
+              <td>{{ delay.stationname }}</td>
+              <td class="text-danger">{{ delay.delayminutes }}</td>
+            </tr>
             {% endfor %}
-          </tr>
-        </thead>
-
-        <tbody>
-          {% for delay in latest_delays %}
-          <tr>
-            <td>{{ delay.date.strftime('%Y-%m-%d') }}</td>
-            <td>{{ delay.subwayline }}</td>
-            <td>{{ delay.stationname }}</td>
-            <td class="text-danger">{{ delay.delayminutes }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <br />
+    <div
+      class=""
+      style="padding-top: 10px; background-color: #f2e9d0; border-radius: 8px"
+    >
+      <div class="col-sm-12">
+        <h2 class="text-center">MTA Subway Delay Statistic</h2>
+      </div>
+      <p></p>
+      <p class="text-center m-2">
+        Below are the average delays for each line and by date. Data are
+        generated by your reportings.
+      </p>
 
-    <div class="col-sm-12" style="background-color: #f2e9d0">
-      <h2>MTA Delay Statistic</h2>
-      <h5>from resource....</h5>
-      <div><table></table></div>
-    </div>
-        <p></p>
-    <p>
-      Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-    </p>
-    
-    
-<h1>Subway Delays Statistics</h1>
+      <div class="row gap-3" style="padding: 30px">
+        <div
+          class="col-5"
+          style="
+            background-color: #d5ab9c;
+            border-radius: 8px;
+            min-width: 210px;
+          "
+        >
+          <h5 class="text-center mt-2">Average Delay Per Line</h5>
+          <div class="">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Subway Line</th>
+                  <!-- <th>Total Delays</th> -->
+                  <th>Average Delay (minutes)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for line, stats in statistics.items() %}
+                <tr>
+                  <td>{{ line }}</td>
+                  <!-- <td>{{ stats.total_delays }}</td> -->
+                  <td>{{ stats.avg_delay }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Subway Line</th>
-      <!-- <th>Total Delays</th> -->
-      <th>Average Delay (minutes)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for line, stats in statistics.items() %}
-    <tr>
-      <td>{{ line }}</td>
-      <!-- <td>{{ stats.total_delays }}</td> -->
-      <td>{{ stats.avg_delay }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-    <div>
-      <!-- <h2 class="mt-5" id="">Delays</h2> -->
-      <h2>Summary by Date</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Total Delays</th>
-      <th>Average Delay (minutes)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for date, summary in date_summary.items() %}
-    <tr>
-      <td>{{ date }}</td>
-      <td>{{ summary.total_delays }}</td>
-      <td>{{ summary.avg_delay }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
+        <!-- <h2 class="mt-5" id="">Delays</h2> -->
+        <div class="col" style="background-color: #d5ab9c; border-radius: 8px">
+          <h5 class="text-center mt-2">Summary by Date</h5>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style="width: 40%">Date</th>
+                <th>Total Delays</th>
+                <th>Average Delay (minutes)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for date, summary in date_summary.items() %}
+              <tr>
+                <td>{{ date }}</td>
+                <td>{{ summary.total_delays }}</td>
+                <td>{{ summary.avg_delay }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

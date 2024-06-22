@@ -76,4 +76,59 @@ body {
   opacity:0.9;
 }
 
+/* report button */
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+}
 
+.cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: rgba(var(--primary), 0.5); /* Changed $primary to CSS variable */
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
+}
+
+.cta span {
+  position: relative;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: var(--color); /* Changed $color to CSS variable */
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover::before {
+  width: 100%;
+  background: rgba(var(--primary), 1); /* Changed $primary to CSS variable */
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.96);
+}
