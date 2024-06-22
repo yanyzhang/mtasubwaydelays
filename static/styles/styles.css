@@ -132,3 +132,18 @@ body {
 .cta:active {
   transform: scale(0.96);
 }
+
+.delayspage {
+  display:flex;
+  max-width:980px;
+  margin:auto;
+  align-items:center;
+}
+
+.form1{
+ padding:10px;
+}
+
+.h2form{
+ text-align: center;
+}

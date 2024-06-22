@@ -1,7 +1,13 @@
 {% extends "base.html" %} {% block title %}MTA Subway Delays{% endblock %}
 {%block content %}
-<div>
-  <h2>Report Subway Delay</h2>
+<h2 class="h2form">Report Subway Delay</h2>
+<div class="delayspage border border-primary rounded">
+  <img
+      src="/static/img/delayimg.jpg"
+      class="form1img border border-primary rounded"
+      style="width: 50%;"
+      alt="subway delay info"
+    />
   <br />
   <!-- Flash message container -->
   {% if show_flash and get_flashed_messages() %}
@@ -18,14 +24,14 @@
   {% endif %}
   <br />
 
-  <form action="/newdelays" method="post">
+  <form class="form1" action="/newdelays" method="post">
     <label for="subwayline">Subway Line</label>
     <input
       type="text"
       id="subwayline"
       placeholder="Subway Line"
       maxlength="1"
-      required
+      required pattern="[A-Z]{1,5}"
       name="subwayline"
     />
     <br /><br />
@@ -59,7 +65,7 @@
     />
     <br />
     <br />
-    <button type="submit" class="btn btn-info">Submit</button>
+    <button type="submit" style="margin-left: 40%" class="btn btn-info">Submit</button>
   </form>
 </div>
 {% endblock %}
